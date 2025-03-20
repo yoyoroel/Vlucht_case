@@ -19,12 +19,13 @@ def read_csv_safe(file_path):
         st.error(f"File not found: {file_path}")
         return pd.DataFrame()  # Return an empty DataFrame if the file is missing
 
-Vluchtdata_part1 = read_csv_safe('Vluchtdata_part1.csv')
-Vluchtdata_part2 = read_csv_safe('Vluchtdata_part2.csv')
-Vluchtdata_part3 = read_csv_safe('Vluchtdata_part3.csv')
-Vluchtdata_part4 = read_csv_safe('Vluchtdata_part4.csv')
-Vluchtdata_part5 = read_csv_safe('Vluchtdata_part5.csv')
-Vluchtdata_part6 = read_csv_safe('Vluchtdata_part6.csv')
+# Update the file paths to the correct directory or ensure the files exist in the current directory
+Vluchtdata_part1 = read_csv_safe('/path/to/Vluchtdata_part1.csv')
+Vluchtdata_part2 = read_csv_safe('/path/to/Vluchtdata_part2.csv')
+Vluchtdata_part3 = read_csv_safe('/path/to/Vluchtdata_part3.csv')
+Vluchtdata_part4 = read_csv_safe('/path/to/Vluchtdata_part4.csv')
+Vluchtdata_part5 = read_csv_safe('/path/to/Vluchtdata_part5.csv')
+Vluchtdata_part6 = read_csv_safe('/path/to/Vluchtdata_part6.csv')
 
 # Merge the six parts into a single DataFrame
 Vluchtdata = pd.concat([Vluchtdata_part1, Vluchtdata_part2, Vluchtdata_part3, Vluchtdata_part4, Vluchtdata_part5, Vluchtdata_part6], ignore_index=True)
