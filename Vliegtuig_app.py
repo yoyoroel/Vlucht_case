@@ -351,7 +351,7 @@ elif pagina == "Live Vluchtdata":
 
 elif pagina == 'Aircraft Ground Count Analysis':
 
-    df = pd.read_csv("Vluchtdata.csv", low_memory=False)
+    df = Vluchtdata
 
     # Streamlit UI
     st.title("Aircraft Ground Count Analysis")
