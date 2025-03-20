@@ -1,0 +1,8 @@
+pandas
+folium
+streamlit
+plotly.express
+plotly.graph_objects
+geographiclib.geodesic
+streamlit_folium
+numpy
