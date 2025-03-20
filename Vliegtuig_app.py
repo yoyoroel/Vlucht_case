@@ -674,8 +674,7 @@ elif pagina == "Vertraging voorspellen":
     df_2019 = Vluchtdata[Vluchtdata['Actual_dt'].dt.year == 2019]
 
     #Normaliseer de 'Flight_status'-kolom
-    df_2019 = df_2019.copy()  # Create a copy to avoid SettingWithCopyWarning
-    df_2019['Flight_status'] = df_2019['Flight_status'].str.strip().str.lower()
+    df_2019.loc[:, 'Flight_status'] = df_2019['Flight_status'].str.strip().str.lower()
 
     #Tel het totaal aantal vluchten per dag
     total_flights_per_day = df_2019.groupby('Date').size().reset_index(name='Total Flights')
@@ -692,18 +691,21 @@ elif pagina == "Vertraging voorspellen":
     show_trendline = st.checkbox("📈 Toon trendlijn (OLS)", value=True)
 
     # ⬇️ Maak een interactieve scatterplot met optionele trendlijn
+    scatter_kwargs = {
+        'x': 'Total Flights',
+        'y': 'Delayed Flights',
+        'title': "Correlatie tussen totaal aantal vluchten en vertraagde vluchten per dag (2019)",
+        'labels': {
+            'Total Flights': 'Totaal aantal vluchten per dag',
+            'Delayed Flights': 'Aantal vertraagde vluchten per dag'
+        }
+    }
+
     if show_trendline:
-        fig = px.scatter(merged_df, x='Total Flights', y='Delayed Flights',
-                         title="Correlatie tussen totaal aantal vluchten en vertraagde vluchten per dag (2019)",
-                         labels={'Total Flights': 'Totaal aantal vluchten per dag',
-                                 'Delayed Flights': 'Aantal vertraagde vluchten per dag'},
-                         trendline="ols",
-                         trendline_color_override='red')
-    else:
-        fig = px.scatter(merged_df, x='Total Flights', y='Delayed Flights',
-                         title="Correlatie tussen totaal aantal vluchten en vertraagde vluchten per dag (2019)",
-                         labels={'Total Flights': 'Totaal aantal vluchten per dag',
-                                 'Delayed Flights': 'Aantal vertraagde vluchten per dag'})
+        scatter_kwargs['trendline'] = "ols"
+        scatter_kwargs['trendline_color_override'] = 'red'
+
+    fig = px.scatter(merged_df, **scatter_kwargs)
 
     # Toon de scatterplot in Streamlit
     st.plotly_chart(fig)
