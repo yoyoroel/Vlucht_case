@@ -585,7 +585,8 @@ elif pagina == 'Vertraging per route':
 
     st.title("Vluchtvertragingen Visualisatie")
 
-    Vluchtdata = pd.read_csv('Vluchtdata.csv')
+    # Gebruik de reeds ingelezen Vluchtdata DataFrame
+    #Vluchtdata = Vluchtdata.copy()
 
     gemiddelde_vertraging = Vluchtdata.groupby([ 
         'Outbound_airport', 'Inbound_airport', 'LSV', 'Dep_lat', 'Dep_lng', 'Arr_lat', 'Arr_lng'
