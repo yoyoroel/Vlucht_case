@@ -6,3 +6,4 @@ geographiclib
 streamlit_folium
 numpy
 openpyxl
+statsmodels
