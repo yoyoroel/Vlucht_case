@@ -350,11 +350,6 @@ elif pagina == "Live Vluchtdata":
     st.plotly_chart(fig)  
 
 elif pagina == 'Aircraft Ground Count Analysis':
-    import streamlit as st
-    import pandas as pd
-    import plotly.graph_objects as go
-    import matplotlib.pyplot as plt
-    import plotly.express as px
 
     df = pd.read_csv("Vluchtdata.csv", low_memory=False)
 
