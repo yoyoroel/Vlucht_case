@@ -1,5 +1,4 @@
 import streamlit as st
-
 st.set_page_config(layout="wide")
 
 import pandas as pd
@@ -50,8 +49,6 @@ Vluchtdata["Year"] = Vluchtdata["Actual_dt"].dt.year
 Vluchtdata["Hour"] = Vluchtdata["Actual_dt"].dt.hour
 Vluchtdata['Date'] = Vluchtdata['Date'].astype(str).str.strip()
 Vluchtdata['Date'] = pd.to_datetime(Vluchtdata['Date'], format='%d/%m/%Y', errors='coerce')
-
-st.set_page_config(layout="wide")
 
 Zurich = [47.464699,8.549170]
 
