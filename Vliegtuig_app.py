@@ -21,12 +21,12 @@ Vluchtdata_part6 = pd.read_csv('Vluchtdata_part6.csv', low_memory=False)
 Vluchtdata = pd.concat([Vluchtdata_part1, Vluchtdata_part2, Vluchtdata_part3, Vluchtdata_part4, Vluchtdata_part5, Vluchtdata_part6], ignore_index=True)
 Vluchtdata = Vluchtdata[Vluchtdata['Arr_airport'] != 'Montgomery Field']
 conditions = [
-    Vluchtdata["Delay_minutes"] < -10,
-    Vluchtdata["Delay_minutes"] <15,
-    Vluchtdata["Delay_minutes"] >=15
+    (Vluchtdata["Delay_minutes"] < -10),
+    (Vluchtdata["Delay_minutes"] >= -10) & (Vluchtdata["Delay_minutes"] < 15),
+    (Vluchtdata["Delay_minutes"] >= 15)
 ]
-choices = ["Early","On Time", "Delayed"]
-Vluchtdata["Flight_status"] = np.select(conditions,choices)
+choices = ["Early", "On Time", "Delayed"]
+Vluchtdata["Flight_status"] = np.select(conditions, choices, default="Unknown")
 
 Vluchtdata['Actual_dt'] = pd.to_datetime(Vluchtdata['Date'] + ' ' + Vluchtdata['Actual_time'], format='%d/%m/%Y %H:%M:%S')
 Vluchtdata["Weekday"] = Vluchtdata["Actual_dt"].dt.day_name()
