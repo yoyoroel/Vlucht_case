@@ -5,3 +5,4 @@ plotly
 geographiclib
 streamlit_folium
 numpy
+openpyxl
