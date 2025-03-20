@@ -14,7 +14,7 @@ Kleur = px.colors.qualitative.Vivid
 
 # Split the CSV into six parts
 
-@st.cache_data
+@st.cache_resource
 def read_csv_safe(file_path):
     """Laad een CSV-bestand met caching."""
     if os.path.exists(file_path):
