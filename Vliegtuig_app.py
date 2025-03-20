@@ -1,6 +1,8 @@
+import streamlit as st
+st.set_page_config(layout="wide")
+
 import pandas as pd
 import folium
-import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 from geographiclib.geodesic import Geodesic
