@@ -252,8 +252,10 @@ elif pagina == "Live Vluchtdata":
     # Filter the flight data based on the selected time range
     filtered_flightdata = flightdata[(flightdata['Time (secs)'] >= start_time) & (flightdata['Time (secs)'] <= end_time)]
 
-    # Ensure 'TRUE AIRSPEED (derived)' is numeric
-    filtered_flightdata['TRUE AIRSPEED (derived)'] = pd.to_numeric(filtered_flightdata['TRUE AIRSPEED (derived)'], errors='coerce')
+    filtered_flightdata = filtered_flightdata.copy()  # ✅ Make an explicit copy
+    filtered_flightdata['TRUE AIRSPEED (derived)'] = pd.to_numeric(
+    filtered_flightdata['TRUE AIRSPEED (derived)'], errors='coerce'
+    )
 
     # Function to create and display the map
     def create_map(flightdata):
