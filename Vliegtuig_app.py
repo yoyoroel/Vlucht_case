@@ -367,7 +367,7 @@ elif pagina == 'Aircraft Ground Count Analysis':
     selected_date = st.date_input("Selecteer een datum", min_value=min(df["Date"]), max_value=max(df["Date"]))
 
     # Filter de data voor de geselecteerde datum
-    df_day = df[df["Date"] == selected_date].copy()
+    df_day = df.loc[df["Date"] == selected_date].copy()
 
     # Alleen doorgaan als er data is voor de geselecteerde datum
     if not df_day.empty:
@@ -674,7 +674,7 @@ elif pagina == "Vertraging voorspellen":
     df_2019 = Vluchtdata[Vluchtdata['Actual_dt'].dt.year == 2019]
 
     #Normaliseer de 'Flight_status'-kolom
-    df_2019['Flight_status'] = df_2019['Flight_status'].str.strip().str.lower()
+    df_2019.loc[:, 'Flight_status'] = df_2019['Flight_status'].str.strip().str.lower()
 
     #Tel het totaal aantal vluchten per dag
     total_flights_per_day = df_2019.groupby('Date').size().reset_index(name='Total Flights')
