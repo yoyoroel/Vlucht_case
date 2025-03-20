@@ -3,7 +3,6 @@ import folium
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
-from geographiclib.geodesic import Geodesic
 from streamlit_folium import st_folium
 import numpy as np
 
