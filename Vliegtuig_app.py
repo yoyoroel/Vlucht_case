@@ -1,4 +1,3 @@
---upgrade pip
 import pandas as pd
 import folium
 import streamlit as st
