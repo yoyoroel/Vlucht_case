@@ -2,7 +2,7 @@ pandas
 folium
 streamlit
 plotly.express
-plotly.graph_objects
+plotly
 geographiclib.geodesic
 streamlit_folium
 numpy
