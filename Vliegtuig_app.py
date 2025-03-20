@@ -6,19 +6,22 @@ import plotly.graph_objects as go
 from geographiclib.geodesic import Geodesic
 from streamlit_folium import st_folium
 import numpy as np
+import os
 
 Kleur = px.colors.qualitative.Vivid
 
 # Split the CSV into six parts
-import os
 
+@st.cache_data
 def read_csv_safe(file_path):
+    """Laad een CSV-bestand met caching."""
     if os.path.exists(file_path):
         return pd.read_csv(file_path, low_memory=False)
     else:
         st.error(f"File not found: {file_path}")
         return pd.DataFrame()  # Return an empty DataFrame if the file is missing
 
+# Laad de datasets met caching
 Vluchtdata_part1 = read_csv_safe('Vluchtdata_part1.csv')
 Vluchtdata_part2 = read_csv_safe('Vluchtdata_part2.csv')
 Vluchtdata_part3 = read_csv_safe('Vluchtdata_part3.csv')
@@ -268,7 +271,7 @@ elif pagina == "Live Vluchtdata":
                     radius=500
                 ).add_to(m)
 
-        st_folium(m, width=1000, height=500)
+        st_folium(m, width="100%", height="100%")
 
     # Create and display the map for the filtered flight data
     create_map(filtered_flightdata)
@@ -584,9 +587,6 @@ elif pagina == 'Vertraging per route':
         return points
 
     st.title("Vluchtvertragingen Visualisatie")
-
-    # Gebruik de reeds ingelezen Vluchtdata DataFrame
-    #Vluchtdata = Vluchtdata.copy()
 
     gemiddelde_vertraging = Vluchtdata.groupby([ 
         'Outbound_airport', 'Inbound_airport', 'LSV', 'Dep_lat', 'Dep_lng', 'Arr_lat', 'Arr_lng'
