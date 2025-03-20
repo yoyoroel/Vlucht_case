@@ -674,7 +674,8 @@ elif pagina == "Vertraging voorspellen":
     df_2019 = Vluchtdata[Vluchtdata['Actual_dt'].dt.year == 2019]
 
     #Normaliseer de 'Flight_status'-kolom
-    df_2019.loc[:, 'Flight_status'] = df_2019['Flight_status'].str.strip().str.lower()
+    df_2019 = df_2019.copy()  # Create a copy to avoid SettingWithCopyWarning
+    df_2019['Flight_status'] = df_2019['Flight_status'].str.strip().str.lower()
 
     #Tel het totaal aantal vluchten per dag
     total_flights_per_day = df_2019.groupby('Date').size().reset_index(name='Total Flights')
