@@ -268,7 +268,7 @@ elif pagina == "Live Vluchtdata":
                     radius=500
                 ).add_to(m)
 
-        st_folium(m, width=1000, height=500)
+        st_folium(m)
 
     # Create and display the map for the filtered flight data
     create_map(filtered_flightdata)
