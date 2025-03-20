@@ -10,12 +10,21 @@ import numpy as np
 Kleur = px.colors.qualitative.Vivid
 
 # Split the CSV into six parts
-Vluchtdata_part1 = pd.read_csv('Vluchtdata_part1.csv', low_memory=False)
-Vluchtdata_part2 = pd.read_csv('Vluchtdata_part2.csv', low_memory=False)
-Vluchtdata_part3 = pd.read_csv('Vluchtdata_part3.csv', low_memory=False)
-Vluchtdata_part4 = pd.read_csv('Vluchtdata_part4.csv', low_memory=False)
-Vluchtdata_part5 = pd.read_csv('Vluchtdata_part5.csv', low_memory=False)
-Vluchtdata_part6 = pd.read_csv('Vluchtdata_part6.csv', low_memory=False)
+import os
+
+def read_csv_safe(file_path):
+    if os.path.exists(file_path):
+        return pd.read_csv(file_path, low_memory=False)
+    else:
+        st.error(f"File not found: {file_path}")
+        return pd.DataFrame()  # Return an empty DataFrame if the file is missing
+
+Vluchtdata_part1 = read_csv_safe('Vluchtdata_part1.csv')
+Vluchtdata_part2 = read_csv_safe('Vluchtdata_part2.csv')
+Vluchtdata_part3 = read_csv_safe('Vluchtdata_part3.csv')
+Vluchtdata_part4 = read_csv_safe('Vluchtdata_part4.csv')
+Vluchtdata_part5 = read_csv_safe('Vluchtdata_part5.csv')
+Vluchtdata_part6 = read_csv_safe('Vluchtdata_part6.csv')
 
 # Merge the six parts into a single DataFrame
 Vluchtdata = pd.concat([Vluchtdata_part1, Vluchtdata_part2, Vluchtdata_part3, Vluchtdata_part4, Vluchtdata_part5, Vluchtdata_part6], ignore_index=True)
