@@ -9,7 +9,16 @@ import numpy as np
 
 Kleur = px.colors.qualitative.Vivid
 
-Vluchtdata = pd.read_csv('Vluchtdata.csv',low_memory=False)
+# Split the CSV into six parts
+Vluchtdata_part1 = pd.read_csv('Vluchtdata_part1.csv', low_memory=False)
+Vluchtdata_part2 = pd.read_csv('Vluchtdata_part2.csv', low_memory=False)
+Vluchtdata_part3 = pd.read_csv('Vluchtdata_part3.csv', low_memory=False)
+Vluchtdata_part4 = pd.read_csv('Vluchtdata_part4.csv', low_memory=False)
+Vluchtdata_part5 = pd.read_csv('Vluchtdata_part5.csv', low_memory=False)
+Vluchtdata_part6 = pd.read_csv('Vluchtdata_part6.csv', low_memory=False)
+
+# Merge the six parts into a single DataFrame
+Vluchtdata = pd.concat([Vluchtdata_part1, Vluchtdata_part2, Vluchtdata_part3, Vluchtdata_part4, Vluchtdata_part5, Vluchtdata_part6], ignore_index=True)
 Vluchtdata = Vluchtdata[Vluchtdata['Arr_airport'] != 'Montgomery Field']
 conditions = [
     Vluchtdata["Delay_minutes"] < -10,
@@ -804,5 +813,3 @@ elif pagina == "Vertraging voorspellen":
     labels={"Concourse": "Concourse", "Delay_minutes": "Vertraging in Minuten"},
     )
     st.plotly_chart(fig)
-
-
