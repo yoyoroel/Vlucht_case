@@ -688,24 +688,19 @@ elif pagina == "Vertraging voorspellen":
     #**Toon data-informatie in Streamlit**
     st.subheader("Correlatie tussen aantal vluchten en vertraagde vluchten")
 
-    show_trendline = st.checkbox("📈 Toon trendlijn (OLS)", value=True)
-
-    # ⬇️ Maak een interactieve scatterplot met optionele trendlijn
-    scatter_kwargs = {
-        'x': 'Total Flights',
-        'y': 'Delayed Flights',
-        'title': "Correlatie tussen totaal aantal vluchten en vertraagde vluchten per dag (2019)",
-        'labels': {
+    # ⬇️ Maak een interactieve scatterplot met trendlijn
+    fig = px.scatter(
+        merged_df,
+        x='Total Flights',
+        y='Delayed Flights',
+        title="Correlatie tussen totaal aantal vluchten en vertraagde vluchten per dag (2019)",
+        labels={
             'Total Flights': 'Totaal aantal vluchten per dag',
             'Delayed Flights': 'Aantal vertraagde vluchten per dag'
-        }
-    }
-
-    if show_trendline:
-        scatter_kwargs['trendline'] = "ols"
-        scatter_kwargs['trendline_color_override'] = 'red'
-
-    fig = px.scatter(merged_df, **scatter_kwargs)
+        },
+        trendline="ols",
+        trendline_color_override='red'
+    )
 
     # Toon de scatterplot in Streamlit
     st.plotly_chart(fig)
